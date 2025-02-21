@@ -1,0 +1,11 @@
+
+docker run -d --name=redis -h redis redis
+docker run -d --name=postgres -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=adminadmin -h postgres postgres
+
+docker run -d -p 1000:80 --link {redis container id} voteimage
+
+docker run -d -p 2000:80 --link {postgress container id} resultimage
+
+
+docker run -d --link {redis container id} --link {postgres container id} workerimage
+
